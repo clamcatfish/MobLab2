@@ -6,11 +6,18 @@
 import {StyleSheet, Text, View} from 'react-native';
 import ToDoList from './components/ToDoList';
 import ToDoForm from './components/ToDoForm';
+import { useState } from 'react';
 
 function App() {
+  const [tasks, setTasks] = useState([
+    'Do laundry',
+    'Go to gym',
+    'Walk dog'
+  ])
+  
   return (
     <View>
-      <ToDoList />
+      <ToDoList tasks={tasks} />
       <ToDoForm />
     </View>
   );
@@ -46,3 +53,5 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
