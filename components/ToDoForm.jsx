@@ -1,15 +1,26 @@
+import {View, TextInput, Button} from 'react-native';
+import styles from '../App';
+import {useState} from 'react';
 
-import { View, TextInput, Button } from "react-native";
-import styles from "../App";
+const ToDoForm = ({ addTask }) => {
+  const [taskText, setTaskText] = useState('');
 
+  const handlePress = () => {
+    addTask(taskText)
+    setTaskText('')
+  }
 
-const ToDoForm = () => {
-    return (
-        <View style={styles.form}>
-        <TextInput style={styles.input} placeholder="Add a new task..." />
-        <Button title="Add" />
-        </View>
-    )
-}
+  return (
+    <View style={styles.form}>
+      <TextInput
+        style={styles.input}
+        placeholder="Add a new task..."
+        onChangeText={text => setTaskText(text)}
+        value={taskText}
+      />
+      <Button title="Add Task" onPress={handlePress} />
+    </View>
+  );
+};
 
-export default ToDoForm
+export default ToDoForm;

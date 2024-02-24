@@ -6,19 +6,26 @@
 import {StyleSheet, Text, View} from 'react-native';
 import ToDoList from './components/ToDoList';
 import ToDoForm from './components/ToDoForm';
-import { useState } from 'react';
+import {useState} from 'react';
 
 function App() {
   const [tasks, setTasks] = useState([
     'Do laundry',
     'Go to gym',
     'Walk dog'
-  ])
-  
+  ]);
+
+  const addTask = input => {
+    if (tasks.some(task => input === task)) {
+      return;
+    }
+    setTasks([...tasks, input]);
+  };
+
   return (
     <View>
       <ToDoList tasks={tasks} />
-      <ToDoForm />
+      <ToDoForm addTask={addTask} />
     </View>
   );
 }
@@ -29,11 +36,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ccc',
   },
+  taskBox: {
+    backgroundColor: '7dcbff',
+    padding: 10,
+  },
   completed: {
     backgroundColor: '#e0e0e0',
   },
   taskText: {
     fontSize: 16,
+    color: 'blue',
   },
   form: {
     flexDirection: 'row',
@@ -53,5 +65,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-
